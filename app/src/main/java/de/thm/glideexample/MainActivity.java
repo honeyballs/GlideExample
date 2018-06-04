@@ -2,6 +2,7 @@ package de.thm.glideexample;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new OnLoadClickListener());
         imageView = findViewById(R.id.imageView);
         listButton = findViewById(R.id.listButton);
+        listButton.setOnClickListener(new OnListButtonClickedListener());
 
     }
 
@@ -99,7 +101,17 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             String url = urlEdit.getText().toString();
             currentUrl = url;
+            urlEdit.setText("");
             loadImage(url);
+        }
+    }
+
+    class OnListButtonClickedListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            startActivity(intent);
         }
     }
 }
