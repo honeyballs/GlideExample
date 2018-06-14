@@ -35,11 +35,26 @@
         android:adjustViewBounds="false"
         android:scaleType="centerInside"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Go to List Activity"
-        android:id="@+id/listButton"
-        android:layout_margin="10dp"/>
+        android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="List Example"
+            android:id="@+id/listButton"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gallery Example"
+            android:id="@+id/galleryButton"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

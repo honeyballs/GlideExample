@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText urlEdit;
     private Button loadButton;
     private ImageView imageView;
-    private Button listButton;
+    private Button listButton, galleryButton;
 
     private static final String URL = "https://placeimg.com/640/480/tech";
     private static final int PERMISSIONS_REQUEST_INTERNET = 42;
@@ -51,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new OnLoadClickListener());
         imageView = findViewById(R.id.imageView);
         listButton = findViewById(R.id.listButton);
-        listButton.setOnClickListener(new OnListButtonClickedListener());
+        galleryButton = findViewById(R.id.galleryButton);
+
+        NavigateButtonListener listener = new NavigateButtonListener();
+        listButton.setOnClickListener(listener);
+        galleryButton.setOnClickListener(listener);
 
     }
 
@@ -60,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         // If we do not have the permission to access the internet we have to acquire it
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             // Request the permission
-            Log.e("permission: ", "not granted");
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.INTERNET}, PERMISSIONS_REQUEST_INTERNET);
         } else if (isConnected()) {
             // GlideApp is the generated API provided by MyGlideAppModule
@@ -106,12 +109,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class OnListButtonClickedListener implements View.OnClickListener {
+    class NavigateButtonListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, ListActivity.class);
-            startActivity(intent);
+            if (v.getId() == R.id.listButton) {
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(MainActivity.this, GalleryActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }
